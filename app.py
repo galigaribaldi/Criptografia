@@ -3,6 +3,7 @@ from flask import Flask, render_template
 from flask_socketio import SocketIO, send
 from flask import request, flash
 from flask import redirect, url_for, session
+import json
 #######################################################
 
 ###################Modulos Propios###################
@@ -66,13 +67,24 @@ def crearCuenta():
 
 @app.route("/saladeChats/<id_usuario>")
 def sala_chats(id_usuario):
-    datos = coneccion.consulta_usuario()
-    return render_template("chat.html", datos=datos)
+    datos = coneccion.consulta_usuario_id(id_usuario)
+    return render_template("chat.html", datos=datos,data=map(json.dumps, datos))
 
 @socketio.on('message')
 def handleMessage(msg):
-    print("Message: "+ msg)
-    send(msg, broadcast= True)
+    tam = len(msg)
+    msg2 = msg[0:tam-2] ##Mensaje que se recibe
+    id = msg[tam-2:tam] ##Id del Usuario
+    ###Se consulta la llave para cada usuario
+    PK = coneccion.consulta_llaves(id)
+    ##Se cifra el mensaje
+    msg2_enc = operaciones.enc2(bytes(msg2, 'utf8'), bytes(PK[0][0]))
+    print("Mensaje Cifrado del usuar¡o con id: "+ id+" ")
+    print(msg2_enc)
+    #Se decifra el mensaje hacia el otro usuario con la llave privada propia
+    msg2_desc= operaciones.des2(bytes(msg2_enc), bytes(PK[0][1]))
+    #print(msg2_desc.decode('utf-8'))
+    send((msg2_desc.decode('utf-8')), broadcast= True)
 
 if __name__ == "__main__":
     socketio.run(app, debug=True)

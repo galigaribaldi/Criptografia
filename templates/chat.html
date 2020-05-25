@@ -1,6 +1,7 @@
 {% extends "layout.html" %} {% block content %}
 <div class="container">
     <h1>Socket</h1>
+    {{ datos }}
     <ul id="messages"></ul>
     <input type="text" id="myMessage">
     <button id="send"> send </button>
@@ -8,13 +9,21 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.4/socket.io.js"></script>
     <script>
         const socket = io()
+            //var ids = $('#idu').val('');
+        var someJavaScriptVar = '{{ datos[0][0] }}';
+        //console.log(someJavaScriptVar);
+        //var id = ids.toString();
         socket.on('message', function(msg) {
             $('#messages').append('<li>' + msg + '</li>')
+                //console.log($(ids).val());
+                //console.log(someJavaScriptVar);
         })
 
         $('#send').on('click', function() {
-            socket.send($('#myMessage').val());
+            socket.send($('#myMessage').val() + (someJavaScriptVar));
             $('#myMessage').val('');
+            //socket.send($('#idu').val());
+            //$('#idu').val('');
         });
     </script>
 </div>
