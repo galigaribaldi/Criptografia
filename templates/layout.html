@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <title>Chat Cifrado</title>
+</head>
+
+<body>
+    <div class="fixed-top">
+        <div class="collapse" id="navbarToggleExternalContent">
+            <div class="bg-dark p-4">
+                <h5 class="text-white h4">Proyecto Criptografía</h5>
+                <span class="text-muted">Proyecto Criptografía 2020 - 2 para la materia de Criptografía</span>
+            </div>
+        </div>
+        <nav class="navbar navbar-dark bg-dark">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+        </nav>
+    </div>
+    <br><br><br><br><br>
+    <div class="container">
+        {% with messages = get_flashed_messages() %} {% if messages %} {% for messages in messages %} {{ messages }} {% endfor %} {% endif %} {% endwith %} {% block content %} {% endblock %}
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+    <br>
+    <br>
+    <br>
+    <!-- Footer -->
+    <footer class="page-footer font-small text-white bg-dark navbar-fixed-bottom">
+        <br> <br>
+        <!-- Grid column -->
+        <div class="container">
+            <div class="container">
+                <h6 class="center text-uppercase mb-4 font-weight-bold">UNAM FI Facultad de Ingeniería</h6>
+                <p>
+                    Nombre: Cabrera Garibaldi Hernán Galileo <br> Fecha: 7 de Junio 2020 <br> Materia: Criptografía <br> Año: 2020 Semestre: 2020 - 2 <br> Contácto: galigaribaldi0@gmail.com
+                </p>
+            </div>
+        </div>
+        <br>
+    </footer>
+    <!-- Footer -->
+</body>
+
+</html>

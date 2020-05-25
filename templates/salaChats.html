@@ -1,0 +1,7 @@
+{% extends "layout.html" %} {% block content %}
+<div class="container">
+    {% for i in datos %}
+    <a href="/saladeChats/{{ i.0 }}">{{ i.1 }}</a> {% endfor %}
+
+</div>
+{% endblock %}
