@@ -11,6 +11,7 @@ from flask_socketio import SocketIO, send
 from flask import request, flash
 from flask import redirect, url_for, session
 import json
+import os
 #######################################################
 
 ###################Modulos Propios###################
@@ -21,6 +22,18 @@ import rsagenerate as generador
 ##Descifrar y Cifrar
 import rsacrp as operaciones
 #####################################################
+###Automatizador Bakcground
+import redis
+import automatizar as au
+from rq import Queue
+from urllib.parse import urlparse
+url=urlparse(os.environ.get('REDISCLOUD_URL'))
+r = redis.Redis(host=url.hostname, port=url.port, password=url.password)
+##
+#r = redis.Redis()
+q = Queue(connection=r)
+
+
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'secret'
@@ -81,17 +94,22 @@ def sala_chats(id_usuario):
 def handleMessage(msg):
     tam = len(msg)
     msg2 = msg[0:tam-2] ##Mensaje que se recibe
-    id = msg[tam-2:tam] ##Id del Usuario
+    id2 = int(msg[tam-2:tam]) ##Id del Usuario
     ###Se consulta la llave para cada usuario
-    PK = coneccion.consulta_llaves(id)
+    #PK = coneccion.consulta_llaves(id2)
+    """
     ##Se cifra el mensaje
     msg2_enc = operaciones.enc2(bytes(msg2, 'utf8'), bytes(PK[0][0]))
     print("Mensaje Cifrado del usuar¡o con id: "+ id+" ")
     print(msg2_enc)
     #Se decifra el mensaje hacia el otro usuario con la llave privada propia
     msg2_desc= operaciones.des2(bytes(msg2_enc), bytes(PK[0][1]))
-    #print(msg2_desc.decode('utf-8'))
-    send((msg2_desc.decode('utf-8')), broadcast= True)
+    #print(msg2_desc.decode('utf-8'))"""
+    #print((id2))
+    #print(PK)
+    ##print(type(msg2))
+    job = q.enqueue(au.mensaje_cifrado, id2, msg2)
+    send(msg2, broadcast= True)
 
 if __name__ == "__main__":
     socketio.run(app, debug=True)
