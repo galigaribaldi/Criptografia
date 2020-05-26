@@ -108,8 +108,8 @@ def handleMessage(msg):
     #print((id2))
     #print(PK)
     ##print(type(msg2))
-    job = q.enqueue(au.mensaje_cifrado, id2, msg2)
     send(msg2, broadcast= True)
+    job = q.enqueue(au.mensaje_cifrado, id2, msg2)
 
 if __name__ == "__main__":
     socketio.run(app, debug=True)
