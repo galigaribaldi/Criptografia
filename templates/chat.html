@@ -1,20 +1,36 @@
 {% extends "layout.html" %} {% block content %}
 <div class="container">
-    <h1>Socket</h1>
-    {{ datos }}
-    <ul id="messages"></ul>
-    <input type="text" id="myMessage">
-    <button id="send"> send </button>
+    <div class="container">
+        <div class="jumbotron">
+            <h1 class="display-4">Bienvenido al Chat Cifrado</h1>
+            <hr class="my-4">
+            <p>Clave Interna: {{ datos.0.0 }} <br> Nombre de Usuario: {{ datos.0.1 }} <br> Apellidos: {{ datos.0.2 }} <br> Correo: {{ datos.0.3 }} <br>
+            </p>
+        </div>
+        <div class="row">
+            <div class="col s6">
+                <div class="alert alert-primary" role="alert">
+                    Ventana de Chats <br>
+                    <ul id="messages"></ul>
+                </div>
+            </div>
+            <div class="col s6">
+                <input type="text" id="myMessage">
+                <button type="button" class="btn btn-primary" id="send"> send </button>
+            </div>
+        </div>
+    </div>
     <script src="http://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.4/socket.io.js"></script>
     <script>
         const socket = io()
             //var ids = $('#idu').val('');
         var someJavaScriptVar = '{{ datos[0][0] }}';
+        var usuario = '{{ datos[0][1] }}';
         //console.log(someJavaScriptVar);
         //var id = ids.toString();
         socket.on('message', function(msg) {
-            $('#messages').append('<li>' + msg + '</li>')
+            $('#messages').append(usuario + ": " + msg + "<br>")
                 //console.log($(ids).val());
                 //console.log(someJavaScriptVar);
         })

@@ -1,3 +1,10 @@
+"""
+
+@author: Cabrera Garibaldi Hernan Galileo
+@description: Programa principal que corre la aplicacion WEB
+
+"""
+
 #################Modulos de Flask#######################
 from flask import Flask, render_template
 from flask_socketio import SocketIO, send

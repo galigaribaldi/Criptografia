@@ -1,13 +1,24 @@
 {% extends "layout.html" %} {% block content %}
 <div class="container">
-    <h3>Ingreso</h3>
-    <br>
-    <form action="/" method="POST">
-        Correo: <input type="text" name="correo" id="loggin"> <br> <br> Password: <input type="text" name="password" id="loggin"> <br> <br>
-        <button id="send"> send </button>
-    </form>
-    <br> <br>
-    <a href="/crearCuenta">Crea una cuenta</a>
+    <div class="container">
+        <h3>Loggin de usuarios</h3>
+        <br>
+        <form action="/" method="POST">
+            <div class="form-group">
+                <label for="exampleInputEmail1">Correo Electrónico</label>
+                <input type="text" class="form-control" id="loggin" aria-describedby="emailHelp" name="correo">
+            </div>
+            <div class="form-group">
+                <label for="exampleInputPassword1">Password</label>
+                <input name="password" id="loggin" class="form-control">
+            </div>
+            <button id="send" type="submit" class="btn btn-primary">Entrar</button>
+        </form>
+        <br>
+        <div class="container">
+            <a href="/crearCuenta" class="btn btn-secondary btn-small active" role="button" aria-pressed="true">Crear Cuenta</a>
+        </div>
+    </div>
     <br> <br><br>
 </div>
 {% endblock %}

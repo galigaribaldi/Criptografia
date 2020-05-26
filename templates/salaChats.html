@@ -1,7 +1,61 @@
 {% extends "layout.html" %} {% block content %}
 <div class="container">
-    {% for i in datos %}
-    <a href="/saladeChats/{{ i.0 }}">{{ i.1 }}</a> {% endfor %}
-
+    <div class="container">
+        <div class="row">
+            <div class="col s6">
+                <div class="card text-white bg-primary">
+                    <div class="card-header">Instrucciones</div>
+                    <div class="card-body">
+                        <h5 class="card-title">¿Que hacer?</h5>
+                        <p class="card-text">
+                            Haz entrado en la sala de Chats, elige con que usuario deseas Chatear y se te abrirá la opcion de hablar con el. <br>
+                            <br> Cabe Decir que si el usuario no está en línea no podrá contestarte. <br>
+                            <br> Si deseas borrar el chat solo recarga la página y se borraran todos los mensajes almacenados <br>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col s6">
+                <div class="card text-white bg-info mb-3">
+                    <div class="card-header">Instrucciones</div>
+                    <div class="card-body">
+                        <h5 class="card-title">¿Privacidad?</h5>
+                        <p class="card-text">
+                            <br> Esta aplicación no guarda los mensajes que tu envíes. <br>
+                            <br> Tu privacidad es muy importante, por lo que los datos irán cifrados extremo a extremo, esto se hace con la asignaciòn de una llave publica y privada personalizada <br>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br><br>
+        <div class="row">
+            <div class="col s12">
+                <div class="card bg-light mb-3">
+                    <div class="card-body">
+                        <h5 class="card-title">Explicación</h5>
+                        <p class="card-text">En el siguiente diagrama se explica un poco mas a detalle como funciona el chat.</p>
+                        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                    </div>
+                    <img src="{{ url_for('static', filename='img/Diagram.png') }}" alt="TEXTO">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="col s12">
+            <h3>Elige un Usuario con quien desees hablar</h3>
+        </div>
+    </div>
+    <br>
+    <br>
+    <br>
+    <div class=" row ">
+        <br> {% for i in datos %}
+        <div class="col s6 ">
+            <a href="/saladeChats/{{ i.0 }} " type="button" class="btn btn-primary btn-lg">{{ i.1 }}</a>
+        </div>
+        {% endfor %}
+    </div>
 </div>
 {% endblock %}
