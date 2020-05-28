@@ -90,6 +90,21 @@ def sala_chats(id_usuario):
     datos = coneccion.consulta_usuario_id(id_usuario)
     return render_template("chat.html", datos=datos,data=map(json.dumps, datos))
 
+@app.route("/enviarllave/<id_usuario>/<correo>/<opcion>")
+def enviarllave(id_usuario, correo, opcion):
+    ###Llave privada
+    if opcion =="1":
+        job = q.enqueue(au.enviar_llave_privada, id_usuario, correo)
+        flash("El correo fue enviado")
+        datos = coneccion.consulta_usuario_id(id_usuario)
+        return render_template("chat.html", datos=datos,data=map(json.dumps, datos))
+    ##llave publica
+    if opcion =="2":
+        job = q.enqueue(au.enviar_llave_privada, id_usuario, correo)
+        flash("El correo fue enviado")
+        datos = coneccion.consulta_usuario_id(id_usuario)
+        return render_template("chat.html", datos=datos,data=map(json.dumps, datos))
+    
 @socketio.on('message')
 def handleMessage(msg):
     tam = len(msg)
@@ -109,7 +124,7 @@ def handleMessage(msg):
     #print(PK)
     ##print(type(msg2))
     send(msg2, broadcast= True)
-    #job = q.enqueue(au.mensaje_cifrado, id2, msg2)
+    job = q.enqueue(au.mensaje_cifrado, id2, msg2)
 
 if __name__ == "__main__":
     socketio.run(app, debug=True)

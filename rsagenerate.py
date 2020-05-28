@@ -28,6 +28,16 @@ class NewKey():
         #g.write(self.llave.publickey().exportKey('PEM'))
         #g.close()
         return self.llave.publickey().exportKey('PEM')
+    
+    def generatePrivateKey_txt(self):
+        f = open('llave.pem', 'wb')
+        f.write(self.llave.exportKey('PEM'))
+        f.close()
+        
+    def generatePublicKey_txt(self):
+        g = open('llave.pem', 'wb')
+        g.write(self.llave.publickey().exportKey('PEM'))
+        g.close()        
 
 #generatePublicKey()
 #generatePrivateKey()
